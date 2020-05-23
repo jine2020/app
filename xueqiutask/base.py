@@ -27,19 +27,19 @@ class Base:
     def teardown_class(self):
         self.driver.quit()
 
-    def click(self, parame, element):
-        self.driver.find_element(parame, element).click()
+    def click(self, *parame):
+        self.find_element(*parame).click()
 
-    def send_keys(self, value, *parame, ):
-        self.driver.find_element(*parame).send_keys(value)
+    def send_keys(self, value, *parame):
+        self.find_element(*parame).send_keys(value)
 
     def get_attribute_text(self, *parame):
-        return self.driver.find_element(*parame).get_attribute('text')
+        return self.find_element(*parame).get_attribute('text')
+    def wait(self,parame,element):
+        WebDriverWait(self.driver, 10).until(
+            ec.presence_of_element_located((parame,element)))
+        return parame,element
 
-    def wait(self, *parame):
-        return WebDriverWait(self.driver, 10).until(
-            ec.presence_of_element_located(*parame)
-        )
-
-    def find_element(self, *parme):
-        return self.driver.find_element(self.wait(*parme))
+    def find_element(self, *parame):
+        ele = self.wait(*parame)
+        return self.driver.find_element(*ele)
