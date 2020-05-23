@@ -13,7 +13,8 @@ class Base:
             "appActivity": ".view.WelcomeActivityAlias",
             "noReset": True,
             "unicodeKeyBord": "true",
-            "resetKeyBord": "true"
+            "resetKeyBord": "true",
+            "automationName":"uiautomator2"
         }
         self.driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', des)
         self.driver.implicitly_wait(15)
@@ -43,3 +44,5 @@ class Base:
     def find_element(self, *parame):
         ele = self.wait(*parame)
         return self.driver.find_element(*ele)
+    def find_toast_text(self,parame,element):
+        return self.driver.find_element(parame,element).text
