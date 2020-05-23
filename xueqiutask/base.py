@@ -1,5 +1,7 @@
 from appium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as ec
 
 
 class Base:
@@ -19,17 +21,25 @@ class Base:
     def setup(self):
         pass
 
-
     def teardown(self):
         self.click(MobileBy.XPATH, '//*[@text="取消"]')
-
 
     def teardown_class(self):
         self.driver.quit()
 
-    def click(self,parame,element):
-        self.driver.find_element(parame,element).click()
-    def send_keys(self,value,*parame,):
+    def click(self, parame, element):
+        self.driver.find_element(parame, element).click()
+
+    def send_keys(self, value, *parame, ):
         self.driver.find_element(*parame).send_keys(value)
-    def get_attribute_text(self,*parame):
+
+    def get_attribute_text(self, *parame):
         return self.driver.find_element(*parame).get_attribute('text')
+
+    def wait(self, *parame):
+        return WebDriverWait(self.driver, 10).until(
+            ec.presence_of_element_located(*parame)
+        )
+
+    def find_element(self, *parme):
+        return self.driver.find_element(self.wait(*parme))

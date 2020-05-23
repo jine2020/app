@@ -7,10 +7,8 @@ class Add_optional(Base):
     def add_optional(self, keys, StockNo):
         self.click(MobileBy.ID, "com.xueqiu.android:id/tv_search")
         self.send_keys(keys, MobileBy.ID, "com.xueqiu.android:id/search_input_text")
-        locctor = (By.XPATH, "//*[@resource-id='com.xueqiu.android:id/name']")
-        self.click(*locctor)
-        locctor2 = (
-            MobileBy.XPATH,
+        self.click(By.XPATH, "//*[@resource-id='com.xueqiu.android:id/name']")
+        locctor2 = (MobileBy.XPATH,
             f"//*[@text='{StockNo}']/../../../android.widget.LinearLayout[3]/android.widget.TextView")
         textstart = self.get_attribute_text(*locctor2)
         self.click(*locctor2)
