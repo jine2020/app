@@ -18,7 +18,7 @@ class TestAddOptional(Add_optional,Equal):
         data1, data2 = self.add_optional(keys, StockNo)
         text = self.find_toast_text(MobileBy.XPATH, "//*[@class='android.widget.Toast']")
         #断言 button toast
-        self.equal(data1, data2, type1)
+        self.equal(data1, data2, type1,errortext)
         self.equaltoast(data1,type1,toast,text,errortext)
 
 
