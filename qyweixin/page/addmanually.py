@@ -1,3 +1,5 @@
+from random import randint
+
 from selenium.webdriver.common.by import By
 from qyweixin.public.base import PageBase
 
@@ -40,11 +42,10 @@ class Address(PageBase):
         return Addmanually(self._driver)
 class Identity(PageBase):
     def identity(self):
-        for i in range(0,2):
+        for i in randint(0,1):
             if i==1:
                 self.click(By.XPATH, "//*[@text='普通成员']")
                 return Addmanually(self._driver)
             else:
                 self.click(By.XPATH, "//*[@text='上级']")
                 return Addmanually(self._driver)
-
