@@ -119,5 +119,20 @@ class TestDW:
             "//*[@text='09988']/../../..//*[ @ resource-id = 'com.xueqiu.android:id/current_price']").text)
         assert current_price > 200
 
+    def test_network(self):
+        #设置网络类型
+        self.driver.set_network_connection(0)
+        sleep(5)
+        self.driver.set_network_connection(1)
+        sleep(5)
+        self.driver.set_network_connection(6)
+    def test_pho(self):
+        #屏幕截图
+        self.driver.get_screenshot_as_file("./pho/img.png")
+        sleep(5)
+        #录屏
+        self.driver.start_recording_screen()
+        self.driver.stop_recording_screen()
+
 if __name__ == '__main__':
     pytest.main(['-vs'])

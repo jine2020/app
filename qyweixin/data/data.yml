@@ -1,0 +1,10 @@
+data:
+  - - 张三
+    - zhangsan@126.com
+    - 深圳市南山区
+  - - 李四
+    - lisi@qq.com
+    - 深圳市福田区
+deldata:
+  - 张三
+  - 李四
