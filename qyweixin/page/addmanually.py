@@ -42,10 +42,10 @@ class Address(PageBase):
         return Addmanually(self._driver)
 class Identity(PageBase):
     def identity(self):
-        for i in randint(0,1):
-            if i==1:
-                self.click(By.XPATH, "//*[@text='普通成员']")
-                return Addmanually(self._driver)
-            else:
-                self.click(By.XPATH, "//*[@text='上级']")
-                return Addmanually(self._driver)
+        i=randint(0,1)
+        if i==1:
+            self.click(By.XPATH, "//*[@text='普通成员']")
+            return Addmanually(self._driver)
+        else:
+            self.click(By.XPATH, "//*[@text='上级']")
+            return Addmanually(self._driver)

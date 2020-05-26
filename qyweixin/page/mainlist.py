@@ -27,5 +27,6 @@ class Mainlist(PageBase):
         except NoSuchElementException :
             return "True"
         except:
-            raise ('操作失败')
+            return "False"
+
 

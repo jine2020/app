@@ -1,10 +1,9 @@
-import pytest
-import yaml
+import pytest,yaml
 from qyweixin.public.initialization import Start
 
 
-class TestAddmember:
-    """企业微信添加成员测试"""
+class TestAddmember():
+    """企业微信添加/删除成员测试"""
     def setup_class(self):
         self.app = Start()
         self.main = self.app.start().main()
