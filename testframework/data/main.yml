@@ -1,0 +1,10 @@
+search:
+  - MobileBy: id
+    locator: "com.xueqiu.android:id/tv_search"
+    action: click
+    #点击搜索
+goto_quotation:
+  - MobileBy: xpath
+    locator: "//*[@text='行情']"
+    action: click
+    #点击行情

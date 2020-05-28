@@ -1,0 +1,19 @@
+add_optional:
+  - MobileBy: xpath
+    locator: "//*[@text='{}']/../../../android.widget.LinearLayout[3]/android.widget.TextView"
+    action: click
+    #点击加自选
+get_text:
+  - MobileBy: xpath
+    locator: "//*[@text='{}']/../../../android.widget.LinearLayout[3]/android.widget.TextView"
+    action: get_attribute
+    #获取加自选按钮文本
+get_toast_text:
+  - MobileBy: xpath
+    locator: "//*[@class='android.widget.Toast']"
+    action: text
+    #获取toast文本
+goto_main:
+  - MobileBy: xpath
+    locator: '//*[@text="取消"]'
+    action: click

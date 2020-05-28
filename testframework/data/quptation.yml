@@ -1,0 +1,5 @@
+goto_search:
+  - MobileBy: xpath
+    locator: "//*[@resource-id='com.xueqiu.android:id/action_search']"
+    action: click
+
