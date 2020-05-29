@@ -3,7 +3,7 @@ from appium.webdriver.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 
-from testframework.common.public import find_element
+from testframework.common.public import find_element, waits
 
 
 class Base:
@@ -12,19 +12,15 @@ class Base:
     def __init__(self,driver:WebDriver=None):
         self._driver=driver
 
-    def wait(self,parame,element):
-        WebDriverWait(self._driver, 10).until(
-            ec.presence_of_element_located((parame,element)))
-        return parame,element
 
     @find_element
-    def find(self,locator,value=None):
+    @waits
+    def find(self, locator, value=None):
         if locator is tuple:
-            locator=self.wait(*locator)
             return self._driver.find_element(*locator)
         else:
-            locator,value=self.wait(locator,value)
-            return self._driver.find_element(locator,value)
+            return self._driver.find_element(locator, value)
+
 
 
     def check(self,sgr1:str,val:dict=None):

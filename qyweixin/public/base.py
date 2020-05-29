@@ -1,5 +1,3 @@
-from functools import wraps
-
 from appium.webdriver.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
@@ -9,7 +7,7 @@ class PageBase:
         (By.XPATH, '//*[@text="确认"]'),
         (By.XPATH, '//*[@text="确定"]')
     }
-    _max_num = 2
+    _max_num = 3
     _error_num = 0
 
     def __init__(self, driver: WebDriver = None):

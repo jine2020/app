@@ -28,6 +28,7 @@ class TestAddOptional(Equal):
         self.equal(data,type1)
         self.equaltoast(data, type1, toast, text)
 
+    # @pytest.mark.skip
     @pytest.mark.parametrize('keys,StockNo', yaml.safe_load(open('../data/date.yml', encoding='utf-8'))['data'])
     @pytest.mark.parametrize('type1', yaml.safe_load(open('../data/date.yml', encoding='utf-8'))['type1'])
     @pytest.mark.parametrize('toast', yaml.safe_load(open('../data/date.yml', encoding='utf-8'))['toast'])
