@@ -1,7 +1,7 @@
 from appium import webdriver
 
-from testframework.common.base import Base
-from testframework.page.main import Main
+from framework.common.base import Base
+from framework.page.main import Main
 
 
 class App(Base):
@@ -35,7 +35,7 @@ class App(Base):
         # 关闭app
         pass
     def go_back(self):
-        from testframework.page.result import Result
+        from framework.page.result import Result
         Result(self._driver).goto_main()
     def main(self) -> Main:
         return Main(self._driver)

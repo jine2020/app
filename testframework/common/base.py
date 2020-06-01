@@ -1,9 +1,7 @@
+import inspect
 import yaml
 from appium.webdriver.webdriver import WebDriver
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as ec
-
-from testframework.common.public import find_element, waits
+from framework.common.public import find_element, waits
 
 
 class Base:
@@ -21,6 +19,8 @@ class Base:
         else:
             return self._driver.find_element(locator, value)
 
+    def screenshort(self,name):
+        return self._driver.save_screenshot(name)
 
 
     def check(self,sgr1:str,val:dict=None):
@@ -30,9 +30,10 @@ class Base:
                 sgr1=sgr1.replace('{}',r,1)
         return sgr1
 
-    def steps(self,path,key:str=None):
+    def steps(self,path):
         result=[]
         with open(path,encoding='utf-8') as f:
+            key=inspect.stack()[1].function
             steps=yaml.safe_load(f)[key]
             for step in steps:
                 if 'locator' in step:

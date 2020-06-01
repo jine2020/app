@@ -1,8 +1,12 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+import logging,time
 
-
+logging.basicConfig(level=logging.INFO)
+times=time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
 def find_element(fuc):
+
     def find(*args,**kwargs):
         # 元素处理
         _black_list = {
@@ -14,13 +18,20 @@ def find_element(fuc):
         _errort_num = 0
         selfs=args[0]
         try:
+            logging.info(times+f' run {fuc.__name__}'+' args:'+repr(args[1:])+'\n'+repr(kwargs))
             fuc(*args, **kwargs)
             _errort_num = 0
-            selfs._driver.implicitly_wait(10)
+            selfs._driver.implicitly_wait(3)
             return fuc(*args, **kwargs)
         except Exception as e:
+            selfs.screenshort('../screenshort/tmp.png')
+            with open("../screenshort/tmp.png",'rb') as f:
+                content=f.read()
+            allure.attach(content,attachment_type=allure.attachment_type.PNG)
+            logging.error(times+' Not find element, enter blacklist processing!')
             selfs._driver.implicitly_wait(1)
             if _errort_num > _max_num:
+                logging.error(times+' Not find element,blacklist processing failed!')
                 raise e
             _errort_num += 1
             for element in _black_list:
@@ -34,6 +45,7 @@ def find_element(fuc):
 def waits(fuc):
     #显示等待
     def wait(*args,**kwargs):
+        logging.info(times+f' run {fuc.__name__}' + ' args:' + repr(args[1:]) + '\n' + repr(kwargs))
         self=args[0]
         loc=args[1]
         ele=args[2]
