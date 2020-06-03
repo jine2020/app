@@ -1,7 +1,8 @@
 import yaml
-import pytest
-from framework.apps.appstart import App
-from framework.page.equals import Equal
+import pytest,sys
+sys.path.append(r'C:\Users\lenovo\PycharmProjects\app')
+from testframework.apps.appstart import App
+from testframework.page.equals import Equal
 
 
 class TestAddOptional(Equal):
@@ -15,7 +16,7 @@ class TestAddOptional(Equal):
         self.main.go_back()
     def teardown_class(self):
         pass
-    @pytest.mark.skip
+    # @pytest.mark.skip
     @pytest.mark.parametrize('keys,StockNo', yaml.safe_load(open('../data/date.yml', encoding='utf-8'))['data'])
     @pytest.mark.parametrize('type1', yaml.safe_load(open('../data/date.yml', encoding='utf-8'))['type1'])
     @pytest.mark.parametrize('toast', yaml.safe_load(open('../data/date.yml', encoding='utf-8'))['toast'])
@@ -27,7 +28,7 @@ class TestAddOptional(Equal):
         self.equal(data,type1)
         self.equaltoast(data, type1, toast, text)
 
-    # @pytest.mark.skip
+    @pytest.mark.skip
     @pytest.mark.parametrize('keys,StockNo', yaml.safe_load(open('../data/date.yml', encoding='utf-8'))['data'])
     @pytest.mark.parametrize('type1', yaml.safe_load(open('../data/date.yml', encoding='utf-8'))['type1'])
     @pytest.mark.parametrize('toast', yaml.safe_load(open('../data/date.yml', encoding='utf-8'))['toast'])

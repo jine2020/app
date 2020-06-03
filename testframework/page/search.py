@@ -1,5 +1,5 @@
-from framework.page.result import Result
-from framework.common.base import Base
+from testframework.common.base import Base
+from testframework.page.result import Result
 
 
 class Search(Base):

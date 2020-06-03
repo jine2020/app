@@ -1,7 +1,7 @@
 import inspect
 import yaml
 from appium.webdriver.webdriver import WebDriver
-from framework.common.public import find_element, waits
+from testframework.common.public import find_element, waits
 
 
 class Base:

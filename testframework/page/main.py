@@ -1,6 +1,6 @@
-from framework.common.base import Base
-from framework.page.quotation import Quotation
-from framework.page.search import Search
+from testframework.common.base import Base
+from testframework.page.quotation import Quotation
+from testframework.page.search import Search
 
 
 class Main(Base):

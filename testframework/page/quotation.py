@@ -1,5 +1,5 @@
-from framework.common.base import Base
-from framework.page.search import Search
+from testframework.common.base import Base
+from testframework.page.search import Search
 
 
 class Quotation(Base):

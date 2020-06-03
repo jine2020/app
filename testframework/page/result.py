@@ -1,4 +1,4 @@
-from framework.common.base import Base
+from testframework.common.base import Base
 
 
 class Result(Base):
@@ -23,5 +23,6 @@ class Result(Base):
 
     def goto_main(self):
         self.steps('../data/result.yml')
-        from framework.page.main import Main
+
+        from testframework.page.main import Main
         return Main(self._driver)
