@@ -1,11 +1,12 @@
 from appium.webdriver.common.mobileby import MobileBy
 from selenium.webdriver.common.by import By
-from xueqiutask.base import Base
+from seleniumhub.test_case.xueqiutask.base import Base
 
 
 class Add_optional(Base):
     def add_optional(self, keys, StockNo):
-        self.click(MobileBy.ID, "com.xueqiu.android:id/tv_search")
+        self.click(MobileBy.XPATH,"//*[@text='行情']")
+        self.click(MobileBy.XPATH, "//*[@resource-id='com.xueqiu.android:id/action_search']")
         self.send_keys(keys, MobileBy.ID, "com.xueqiu.android:id/search_input_text")
         self.click(By.XPATH, "//*[@resource-id='com.xueqiu.android:id/name']")
         locctor2 = (MobileBy.XPATH,

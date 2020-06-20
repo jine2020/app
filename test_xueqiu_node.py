@@ -27,7 +27,6 @@ class TestDW:
         # self.driver=webdriver.Remote('127.0.0.1:4723/wd/hub',des)
         self.driver = webdriver.Remote('192.168.109.1:4444/wd/hub', des)
         self.driver.implicitly_wait(15)
-        print(os.getenv('udid'))
     def teardown(self):
         # self.driver.back()
         # self.driver.back()
@@ -40,6 +39,8 @@ class TestDW:
             输入albb or xiaomi
             点击第一个搜索结果
             判断股票价格"""
+        sleep(2)
+        self.driver.find_element(MobileBy.XPATH,"//*[@text='行情']").click()
         self.driver.find_element(MobileBy.XPATH, "//*[@class='android.widget.LinearLayout']").click()
         self.driver.find_element(MobileBy.XPATH, "//*[@resource-id='com.xueqiu.android:id/search_input_text']").send_keys(keys)
         sleep(5)

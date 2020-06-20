@@ -1,3 +1,5 @@
+import os
+
 from appium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
 from selenium.webdriver.support.wait import WebDriverWait
@@ -9,6 +11,7 @@ class Base:
         des = {
             "platformName": "android",
             "deviceName": '127.0.0.1:7555',
+            "udid": os.getenv('udid',None),
             "appPackage": "com.xueqiu.android",
             "appActivity": ".view.WelcomeActivityAlias",
             "noReset": True,
@@ -16,7 +19,8 @@ class Base:
             "resetKeyBord": "true",
             "automationName":"uiautomator2"
         }
-        self.driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', des)
+        self.driver = webdriver.Remote('http://192.168.109.1:4444/wd/hub', des)
+        # self.driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', des)
         self.driver.implicitly_wait(15)
 
     def setup(self):

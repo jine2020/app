@@ -13,7 +13,7 @@ class TestAddOptional(Add_optional,Equal):
     @pytest.mark.parametrize('type1', yaml.safe_load(open(r'C:\Users\lenovo\PycharmProjects\app\seleniumhub\test_case\xueqiutask/date.yml', encoding='utf-8'))['type1'])
     @pytest.mark.parametrize('toast', yaml.safe_load(open(r'C:\Users\lenovo\PycharmProjects\app\seleniumhub\test_case\xueqiutask/date.yml', encoding='utf-8'))['toast'])
     @pytest.mark.parametrize('errortext', yaml.safe_load(open(r'C:\Users\lenovo\PycharmProjects\app\seleniumhub\test_case\xueqiutask/date.yml', encoding='utf-8'))['toasterrortext'])
-    def test_add_optional(self, keys, StockNo, type1,toast,errortext):
+    def test_add_optional1(self, keys, StockNo, type1,toast,errortext):
         """测试加自选按钮"""
         data1, data2 = self.add_optional(keys, StockNo)
         #断言 button
