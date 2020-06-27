@@ -1,4 +1,8 @@
+import json
+from hamcrest import *
+from jsonpath import jsonpath
 import requests, pystache
+from jsonschema import validate
 
 
 class TestDemo():
@@ -46,3 +50,25 @@ class TestDemo():
     def test_mustache(self):
         print(pystache.render('Hi {{penson}}!',
                               {'penson': 'seveniruby'}))
+
+
+    def test_json_demo(self):
+        r = requests.get('https://home.testing-studio.com/categories.json')
+        print(r.text)
+        assert r.status_code == 200
+        assert r.json()['category_list']['categories'][0]['name']=='霍格沃兹测试学院公众号'
+        assert jsonpath(r.json(),'$..name')[0]=='霍格沃兹测试学院公众号'
+
+    def test_hamcrest(self):
+        r = requests.get('https://home.testing-studio.com/categories.json')
+        print(r.text)
+        assert r.status_code == 200
+        assert_that(r.json()['category_list']['categories'][0]['name'], equal_to('霍格沃兹测试学院公众号'))
+
+    def test_jsonschema(self):
+        r = requests.get('https://home.testing-studio.com/categories.json')
+        print(r.text)
+        assert r.status_code == 200
+        data=r.json()['category_list']['categories'][0]['name']
+        schema=json.load(open('categories_schema.json'))
+        validate(data,schema=schema)
