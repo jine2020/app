@@ -1,11 +1,12 @@
-
 import re
+
+from filelock import FileLock
+
 from requests_wework.auto_data import auto_name
 import pytest
 import requests
 
-_corpid = 'ww7c598bbdd3aa6f03'
-_corpsecret = 'kPD0yEMpM6PhxMYY2h1HO-GXoLmxIa2FMvYdWSpmUqw'
+
 _name=auto_name()
 
 def test_demo():
@@ -14,7 +15,10 @@ def test_demo():
 
 @pytest.fixture(scope='session')
 def test_token():
-    res = requests.get(f'https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={_corpid}&corpsecret={_corpsecret}')
+    with FileLock('session.lock'):
+        _corpid = 'ww7c598bbdd3aa6f03'
+        _corpsecret = 'kPD0yEMpM6PhxMYY2h1HO-GXoLmxIa2FMvYdWSpmUqw'
+        res = requests.get(f'https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={_corpid}&corpsecret={_corpsecret}')
     return res.json()['access_token']
 
 
