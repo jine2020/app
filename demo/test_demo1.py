@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from time import sleep
 from selenium import webdriver
@@ -6,9 +8,12 @@ from selenium import webdriver
 class TestDemo():
     # 容器化ui自动化分布式demo
     def setup(self):
+        # self._driver = webdriver.Remote('http://192.168.205.209:5001/wd/hub')
         self._driver = webdriver.Remote('http://192.168.43.76:5001/wd/hub')
         # self._driver=webdriver.Chrome()
         self._driver.get('http://192.168.43.161:1080/WebTours/')
+        # self._driver.get('http://192.168.215.200:1080/WebTours/')
+        # self._driver.save_screenshot('./jgp/shot'+str(time.localtime())+'.png')
         self._driver.implicitly_wait(10)
 
     def teardown(self):
