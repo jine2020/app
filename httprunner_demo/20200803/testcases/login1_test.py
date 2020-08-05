@@ -10,20 +10,26 @@ class TestCaseLogin1(HttpRunner):
         "param",
         Parameters(
             {
-            "node1":['span1','span2']
+            "title-node1-node2":[
+                ['dome1','node11','node22'],
+                ['dome2','node33','node44']
+                ],
             }
         ),
     )
-    def test_login1(self,param):
+    def test_start(self,param):
         super().test_start(param)
 
-    config = Config("create new doc").verify(False).variables(
+    config = Config("create new doc").variables(**{
+            "phone": "13544871706",
+            "password": "100100"
+            }).variables(
         **{
             'host':'mubu.com',
             'title':'demo1221',
             'node1': 'node1',
             'node2': 'span2'
-        }).base_url('https://${host}')
+        }).base_url('https://${host}').verify(False)
 
     teststeps = [
         Step(
