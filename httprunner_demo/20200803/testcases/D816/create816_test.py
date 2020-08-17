@@ -3,67 +3,25 @@
 
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
+from testcases.D816.api_demo.create_doc import TestCaseCreate_doc as create_doc
 
 
 class TestCaseCreate816(HttpRunner):
 
-    config = Config("testcase description").verify(False)
+    _config=Config("create_doc")
+    _conf=_config.conf()
+    _headers_get = _config.headers_get()
+    _headers_post = _config.headers_post()
+    _cookies = _config.cookies()
+
+    config = _config.verify(False).variables(**_conf)
 
     teststeps = [
         Step(
-            RunRequest("/api/list/create_doc")
-            .post("https://mubu.com/api/list/create_doc")
-            .with_headers(
-                **{
-                    "Host": "mubu.com",
-                    "Connection": "keep-alive",
-                    "Content-Length": "17",
-                    "Accept": "application/json, text/javascript, */*; q=0.01",
-                    "X-Requested-With": "XMLHttpRequest",
-                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36",
-                    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-                    "Origin": "https://mubu.com",
-                    "Sec-Fetch-Site": "same-origin",
-                    "Sec-Fetch-Mode": "cors",
-                    "Sec-Fetch-Dest": "empty",
-                    "Referer": "https://mubu.com/list",
-                    "Accept-Encoding": "gzip, deflate, br",
-                    "Accept-Language": "zh-CN,zh;q=0.9,zh-TW;q=0.8,en-US;q=0.7,en;q=0.6",
-                    "Cookie": "data_unique_id=7222cae2-b7dc-4408-9f71-807c68a3eb81; _ga=GA1.2.1822844197.1596433171; mubu_inner=1; csrf_token=a74972e2-0727-4395-b1fa-400fbe08325c; s_v_web_id=kdwe8wtg_IWRh2iHm_Au97_4vwv_BxRg_zTqc5dL0ZNUB; reg_entrance=https%3A%2F%2Fmubu.com%2Flist; Hm_lvt_4426cbb0486a79ea049b4ad52d81b504=1596433171,1597337082,1597540301; _gid=GA1.2.409539580.1597540301; SESSION=30120b91-1015-4a70-a0e9-b847513fb7a4; language=en-US; country=US; data-unique-id=94621570-df5d-11ea-b2f4-7b6b4ed26dc0; reg_prepareId=173f4d6150c-173f4d61378-4eed-87b6-22fbe84f824a; reg_focusId=43853c60-8ec0-4eed-87b6-173f4d62bd5; Jwt-Token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJhcHAiOiJtdWJ1Iiwic3ViIjoiODQ5MTE4MiIsImV4cCI6MTYwMDEzMjU1NSwiaWF0IjoxNTk3NTQwNTU1fQ.3lpdtDyUWcc3EudscLgoPku6JzYQcG-7G3nji4VTiHCdGYdnY_jPQ-5RaJVfLv2wDq3oBeEsBzJd3pXGuJedSw; user_persistence=04997eaf-6d5a-4250-9d45-9f7552f018c6; SLARDAR_WEB_ID=8a079211-f670-4251-8f39-f7f3329b248d; Hm_lpvt_4426cbb0486a79ea049b4ad52d81b504=1597540556",
-                }
-            )
-            .with_cookies(
-                **{
-                    "data_unique_id": "7222cae2-b7dc-4408-9f71-807c68a3eb81",
-                    "_ga": "GA1.2.1822844197.1596433171",
-                    "mubu_inner": "1",
-                    "csrf_token": "a74972e2-0727-4395-b1fa-400fbe08325c",
-                    "s_v_web_id": "kdwe8wtg_IWRh2iHm_Au97_4vwv_BxRg_zTqc5dL0ZNUB",
-                    "reg_entrance": "https%3A%2F%2Fmubu.com%2Flist",
-                    "Hm_lvt_4426cbb0486a79ea049b4ad52d81b504": "1596433171,1597337082,1597540301",
-                    "_gid": "GA1.2.409539580.1597540301",
-                    "SESSION": "30120b91-1015-4a70-a0e9-b847513fb7a4",
-                    "language": "en-US",
-                    "country": "US",
-                    "data-unique-id": "94621570-df5d-11ea-b2f4-7b6b4ed26dc0",
-                    "reg_prepareId": "173f4d6150c-173f4d61378-4eed-87b6-22fbe84f824a",
-                    "reg_focusId": "43853c60-8ec0-4eed-87b6-173f4d62bd5",
-                    "Jwt-Token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJhcHAiOiJtdWJ1Iiwic3ViIjoiODQ5MTE4MiIsImV4cCI6MTYwMDEzMjU1NSwiaWF0IjoxNTk3NTQwNTU1fQ.3lpdtDyUWcc3EudscLgoPku6JzYQcG-7G3nji4VTiHCdGYdnY_jPQ-5RaJVfLv2wDq3oBeEsBzJd3pXGuJedSw",
-                    "user_persistence": "04997eaf-6d5a-4250-9d45-9f7552f018c6",
-                    "SLARDAR_WEB_ID": "8a079211-f670-4251-8f39-f7f3329b248d",
-                    "Hm_lpvt_4426cbb0486a79ea049b4ad52d81b504": "1597540556",
-                }
-            )
-            .with_data({"folderId": "0", "type": "0"})
-            .validate()
-            .assert_equal("status_code", 200)
-            .assert_equal('headers."Content-Type"', "application/json;charset=UTF-8")
-            .assert_equal("body.code", 0)
-            .assert_equal("body.msg", None)
-        ),
+            RunTestCase("create_doc").call(create_doc).export("id")),
         Step(
-            RunRequest("/doc5-tAX4y202K")
-            .get("https://mubu.com/doc5-tAX4y202K")
+            RunRequest("/doc${id}")
+            .get("https://mubu.com/doc${id}")
             .with_headers(
                 **{
                     "Host": "mubu.com",
@@ -121,7 +79,7 @@ class TestCaseCreate816(HttpRunner):
                     "Sec-Fetch-Mode": "navigate",
                     "Sec-Fetch-User": "?1",
                     "Sec-Fetch-Dest": "document",
-                    "Referer": "https://mubu.com/doc5-tAX4y202K",
+                    "Referer": "https://mubu.com/doc${id}",
                     "Accept-Encoding": "gzip, deflate, br",
                     "Accept-Language": "zh-CN,zh;q=0.9,zh-TW;q=0.8,en-US;q=0.7,en;q=0.6",
                     "Cookie": "data_unique_id=7222cae2-b7dc-4408-9f71-807c68a3eb81; _ga=GA1.2.1822844197.1596433171; mubu_inner=1; csrf_token=a74972e2-0727-4395-b1fa-400fbe08325c; s_v_web_id=kdwe8wtg_IWRh2iHm_Au97_4vwv_BxRg_zTqc5dL0ZNUB; reg_entrance=https%3A%2F%2Fmubu.com%2Flist; Hm_lvt_4426cbb0486a79ea049b4ad52d81b504=1596433171,1597337082,1597540301; _gid=GA1.2.409539580.1597540301; SESSION=30120b91-1015-4a70-a0e9-b847513fb7a4; language=en-US; country=US; data-unique-id=94621570-df5d-11ea-b2f4-7b6b4ed26dc0; reg_prepareId=173f4d6150c-173f4d61378-4eed-87b6-22fbe84f824a; reg_focusId=43853c60-8ec0-4eed-87b6-173f4d62bd5; Jwt-Token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJhcHAiOiJtdWJ1Iiwic3ViIjoiODQ5MTE4MiIsImV4cCI6MTYwMDEzMjU1NSwiaWF0IjoxNTk3NTQwNTU1fQ.3lpdtDyUWcc3EudscLgoPku6JzYQcG-7G3nji4VTiHCdGYdnY_jPQ-5RaJVfLv2wDq3oBeEsBzJd3pXGuJedSw; user_persistence=04997eaf-6d5a-4250-9d45-9f7552f018c6; Hm_lpvt_4426cbb0486a79ea049b4ad52d81b504=1597540556; _gat_UA-77727571-3=1; SLARDAR_WEB_ID=2a42642f-34f0-4795-b8b1-d30a3a1e9800",
