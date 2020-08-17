@@ -1,0 +1,72 @@
+default: stg
+env:
+      stg: mubu.com
+      uat: null
+      dev: null
+"conf":
+      "host": "mubu.com"
+      "connection": "keep-alive"
+      "UserAgent": "httprunner/${get_httprunner_version()}"
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+      "accept1": "application/json, text/javascript, */*; q=0.01"
+      "cookie": "data_unique_id=7222cae2-b7dc-4408-9f71-807c68a3eb81; _ga=GA1.2.1822844197.1596433171; mubu_inner=1; csrf_token=a74972e2-0727-4395-b1fa-400fbe08325c; s_v_web_id=kdwe8wtg_IWRh2iHm_Au97_4vwv_BxRg_zTqc5dL0ZNUB; reg_entrance=https%3A%2F%2F${host}%2Flist; Hm_lvt_4426cbb0486a79ea049b4ad52d81b504=1596433171,1597337082,1597540301; _gid=GA1.2.409539580.1597540301; SESSION=30120b91-1015-4a70-a0e9-b847513fb7a4; language=en-US; country=US; data-unique-id=94621570-df5d-11ea-b2f4-7b6b4ed26dc0; _gat=1; reg_prepareId=173f4d6150c-173f4d61378-4eed-87b6-22fbe84f824a; reg_focusId=43853c60-8ec0-4eed-87b6-173f4d62bd5; SLARDAR_WEB_ID=650cac62-fff2-42ce-9409-7a056dd5ef38; Hm_lpvt_4426cbb0486a79ea049b4ad52d81b504=1597540544; Jwt-Token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJhcHAiOiJtdWJ1Iiwic3ViIjoiODQ5MTE4MiIsImV4cCI6MTYwMDEzMjU1NSwiaWF0IjoxNTk3NTQwNTU1fQ.3lpdtDyUWcc3EudscLgoPku6JzYQcG-7G3nji4VTiHCdGYdnY_jPQ-5RaJVfLv2wDq3oBeEsBzJd3pXGuJedSw; user_persistence=04997eaf-6d5a-4250-9d45-9f7552f018c6"
+      "accept_language": "zh-CN,zh;q=0.9,zh-TW;q=0.8,en-US;q=0.7,en;q=0.6"
+      "uir": "1"
+      "accept_encoding": "gzip, deflate, br"
+      "ContentType": "application/x-www-form-urlencoded; charset=UTF-8"
+"sec": &sec
+      "Sec-Fetch-Site": "same-origin"
+      "Sec-Fetch-Mode": "navigate"
+      "Sec-Fetch-User": "?1"
+      "Sec-Fetch-Dest": "document"
+"sec1": &sec1
+      "Sec-Fetch-Site": "same-origin"
+      "Sec-Fetch-Mode": "cors"
+      "Sec-Fetch-Dest": "empty"
+"getandpost": &getandpost
+      "Host": "${host}"
+      "Connection": "${connection}"
+      "User-Agent": "${UserAgent}"
+      "Accept-Encoding": "${accept_encoding}"
+      "Accept-Language": "${accept_language}"
+"header_get": &header_get
+      "Upgrade-Insecure-Requests": "${uir}"
+      "Accept": "${accept}"
+      <<: *getandpost
+"header_post": &header_post
+      "Content-Length": "${length}"
+      "Accept": "${accept1}"
+      "X-Requested-With": "XMLHttpRequest"
+      "Origin": "https://${host}"
+      <<: *getandpost
+"cookiesandreferer": &cookiesandreferer
+    "Cookie": "${cookie}"
+    "Referer": "${referer}"
+"headers_get":
+      <<: *cookiesandreferer
+      <<: *sec
+      <<: *header_get
+"headers_post":
+      <<: *cookiesandreferer
+      <<: *sec1
+      <<: *header_post
+"cookies": &cookies
+      "data_unique_id": "7222cae2-b7dc-4408-9f71-807c68a3eb81"
+      "_ga": "GA1.2.1822844197.1596433171"
+      "mubu_inner": "1"
+      "csrf_token": "a74972e2-0727-4395-b1fa-400fbe08325c"
+      "s_v_web_id": "kdwe8wtg_IWRh2iHm_Au97_4vwv_BxRg_zTqc5dL0ZNUB"
+      "reg_entrance": "https%3A%2F%2F${host}%2Flist"
+      "Hm_lvt_4426cbb0486a79ea049b4ad52d81b504": "1596433171,1597337082,1597540301"
+      "_gid": "GA1.2.409539580.1597540301"
+      "SESSION": "30120b91-1015-4a70-a0e9-b847513fb7a4"
+      "language": "en-US"
+      "country": "US"
+      "data-unique-id": "94621570-df5d-11ea-b2f4-7b6b4ed26dc0"
+      "_gat": "1"
+      "reg_prepareId": "173f4d6150c-173f4d61378-4eed-87b6-22fbe84f824a"
+      "reg_focusId": "43853c60-8ec0-4eed-87b6-173f4d62bd5"
+      "SLARDAR_WEB_ID": "650cac62-fff2-42ce-9409-7a056dd5ef38"
+      "Hm_lpvt_4426cbb0486a79ea049b4ad52d81b504": "1597540544"
+      "Jwt-Token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJhcHAiOiJtdWJ1Iiwic3ViIjoiODQ5MTE4MiIsImV4cCI6MTYwMDEzMjU1NSwiaWF0IjoxNTk3NTQwNTU1fQ.3lpdtDyUWcc3EudscLgoPku6JzYQcG-7G3nji4VTiHCdGYdnY_jPQ-5RaJVfLv2wDq3oBeEsBzJd3pXGuJedSw"
+      "user_persistence": "04997eaf-6d5a-4250-9d45-9f7552f018c6"

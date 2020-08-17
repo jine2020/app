@@ -11,9 +11,9 @@ class TestCaseLogin(HttpRunner):
         .verify(False)
         .variables(
             **{
-            "host": "mubu.com",
-            "phone": "13544871706",
-            "password": "100100"
+            "host": "${url()}",
+            "phone": "${conf(phone)}",
+            "password": "${conf(password)}"
             })
         .base_url("https://${host}")
     )

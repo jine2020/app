@@ -5,36 +5,39 @@ from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 from testcases.login_test import TestCaseLogin as MubuLogin
 from httprunner import Parameters
 
+
 class TestCaseLogin1(HttpRunner):
     @pytest.mark.parametrize(
         "param",
         Parameters(
             {
-            "title-node1-node2":[
-                ['dome1','node11','node22'],
-                ['dome2','node33','node44']
+                "title-node1-node2": [
+                    ["dome1", "node11", "node22"],
+                    ["dome2", "node33", "node44"],
                 ],
             }
         ),
     )
-    def test_start(self,param):
+    def test_start(self, param):
         super().test_start(param)
 
-    config = Config("create new doc").variables(**{
-            "phone": "13544871706",
-            "password": "100100"
-            }).variables(
-        **{
-            'host':'mubu.com',
-            'title':'demo1221',
-            'node1': 'node1',
-            'node2': 'span2'
-        }).base_url('https://${host}').verify(False)
+    config = (
+        Config("create new doc")
+        .variables(**{"phone": "13544871706", "password": "100100"})
+        .variables(
+            **{
+                "host": "mubu.com",
+                "title": "demo1221",
+                "node1": "node1",
+                "node2": "span2",
+            }
+        )
+        .base_url("https://${host}")
+        .verify(False)
+    )
 
     teststeps = [
-        Step(
-            RunTestCase('login_mubu').call(MubuLogin).export('userId')
-        ),
+        Step(RunTestCase("login_mubu").call(MubuLogin).export("userId")),
         Step(
             RunRequest("/api/list/create_doc")
             .post("/api/list/create_doc")
@@ -80,8 +83,8 @@ class TestCaseLogin1(HttpRunner):
                 }
             )
             .with_data({"folderId": "0", "type": "0"})
-                .extract()
-                .with_jmespath('body.data.id','fileID')
+            .extract()
+            .with_jmespath("body.data.id", "fileID")
             .validate()
             .assert_equal("status_code", 200)
             .assert_equal('headers."Content-Type"', "application/json;charset=UTF-8")
@@ -308,9 +311,7 @@ class TestCaseLogin1(HttpRunner):
         Step(
             RunRequest("/v3/api/colla/members")
             .options("https://api2.${host}/v3/api/colla/members")
-            .with_params(
-                **{"memberId": "6093059803590483", "documentId": "${fileID}"}
-            )
+            .with_params(**{"memberId": "6093059803590483", "documentId": "${fileID}"})
             .with_headers(
                 **{
                     "Host": "api2.${host}",
@@ -335,9 +336,7 @@ class TestCaseLogin1(HttpRunner):
         Step(
             RunRequest("/v3/api/colla/members")
             .get("https://api2.${host}/v3/api/colla/members")
-            .with_params(
-                **{"memberId": "6093059803590483", "documentId": "${fileID}"}
-            )
+            .with_params(**{"memberId": "6093059803590483", "documentId": "${fileID}"})
             .with_headers(
                 **{
                     "Host": "api2.${host}",
