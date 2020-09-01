@@ -15,6 +15,7 @@ config = configparser.ConfigParser()
 config_path = get_path() + '\conf\conf.ini'
 config.read(config_path, encoding='utf8')
 api_data_path=get_path()+'\data\\api_data.yml'
+login_path=get_path()+'\\testcases\\login826.yml'
 
 
 class PublicApi():
@@ -39,8 +40,20 @@ class PublicApi():
             value=yaml.safe_load(f)[param]
             return value
 
+    def login_data(self,param:str):
+        with open(login_path,encoding="utf8") as f:
+            value=yaml.safe_load(f)[param]
+            return value
+
+class ApiData():
+    def api_data(self,param: str):
+        # 获取api结构数据
+        return PublicApi().get_api_data(param)
+    def login_data(self,param:str):
+        #登录数据
+        return PublicApi().login_data(param)
 
 if __name__ == '__main__':
-    p=PublicApi().get_url()
+    p=ApiData().login_data('phone-password-code-msg')
     print(p)
 

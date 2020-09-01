@@ -24,11 +24,8 @@ def url():
     # 获取测试地址
     return PublicApi().get_url()
 
-class ApiData():
-    def api_data(self,param: str):
-        # 获取api结构数据
-        return PublicApi().get_api_data(param)
+
 
 
 if __name__ == '__main__':
-    print(ApiData().api_data("headers_get"))
+    print(conf('phone'))
