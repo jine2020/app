@@ -31,7 +31,6 @@ class TestDemo():
     @pytest.mark.parametrize('value', ['百度', '顺丰', '京东', '淘宝'])
     def test_demo(self, value):
         text = self._driver.find_element_by_xpath('//*[@id="1"]/h3/a[1]').text
-        assert '百度一下' in text, '分布式运行失败'
         self._driver.find_element_by_xpath('//*[@id="kw"]').clear()
         self._driver.find_element_by_xpath('//*[@id="kw"]').send_keys(value)
         self._driver.find_element_by_xpath('//*[@id="su"]').click()
@@ -40,7 +39,6 @@ class TestDemo():
     @pytest.mark.parametrize('value', ['百度', '顺丰', '京东', '淘宝'])
     def test_demo1(self, value):
         text = self._driver.find_element_by_xpath('//*[@id="1"]/h3/a[1]').text
-        assert '百度一下' in text, '分布式运行失败'
         self._driver.find_element_by_xpath('//*[@id="kw"]').clear()
         self._driver.find_element_by_xpath('//*[@id="kw"]').send_keys(value)
         self._driver.find_element_by_xpath('//*[@id="su"]').click()
