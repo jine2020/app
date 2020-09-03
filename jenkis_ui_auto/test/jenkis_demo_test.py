@@ -8,7 +8,6 @@ from selenium.webdriver.chrome.options import Options
 
 
 class TestDemo():
-    # 无界面运行浏览器自动化demo
     def setup(self):
         namepath = os.path.abspath(os.path.dirname(__file__))
         projectpath = namepath[:namepath.find("jenkis_ui_auto\\")] + "jenkis_ui_auto\\"
@@ -17,7 +16,7 @@ class TestDemo():
             using_headless=os.environ['using_headless']
         except KeyError:
             using_headless=None
-            print('没有配置环境变量 using_headless,按照有界面方式运行浏览器')
+            print('no using_headless')
         options=Options()
         if using_headless is not None and using_headless.lower()=='true':
             options.add_argument('--headless')
