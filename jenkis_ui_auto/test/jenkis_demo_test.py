@@ -1,8 +1,5 @@
 # encoding: utf-8
-import configparser
 import os
-
-import pytest
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -27,17 +24,15 @@ class TestDemo():
 
     def teardown(self):
         self._driver.quit()
-
-    @pytest.mark.parametrize('value', ['百度', '顺丰', '京东', '淘宝'])
-    def test_demo(self, value):
+        
+    def test_demo(self, value='126'):
         text = self._driver.find_element_by_xpath('//*[@id="1"]/h3/a[1]').text
         self._driver.find_element_by_xpath('//*[@id="kw"]').clear()
         self._driver.find_element_by_xpath('//*[@id="kw"]').send_keys(value)
         self._driver.find_element_by_xpath('//*[@id="su"]').click()
         sleep(3)
 
-    @pytest.mark.parametrize('value', ['百度', '顺丰', '京东', '淘宝'])
-    def test_demo1(self, value):
+    def test_demo1(self, value='163'):
         text = self._driver.find_element_by_xpath('//*[@id="1"]/h3/a[1]').text
         self._driver.find_element_by_xpath('//*[@id="kw"]').clear()
         self._driver.find_element_by_xpath('//*[@id="kw"]').send_keys(value)
@@ -45,5 +40,3 @@ class TestDemo():
         sleep(3)
 
 
-if __name__ == '__main__':
-    pytest.main()
