@@ -10,7 +10,7 @@ class TestDemo():
         namepath = os.path.abspath(os.path.dirname(__file__))
         projectpath = namepath[:namepath.find("jenkis_ui_auto\\")] + "jenkis_ui_auto\\"
         print(projectpath)
-        path={pwd}+'\\driver\\chromedriver.exe'
+        path=${pwd}+'\\driver\\chromedriver.exe'
         try:
             using_headless=os.environ['using_headless']
         except KeyError:
