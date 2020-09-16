@@ -18,6 +18,7 @@ class TestDemo():
         options=Options()
         #if using_headless is not None and using_headless.lower()=='true':
         #    options.add_argument('--headless')
+        options.add_argument('--no-sandbox')
         self._driver = webdriver.Chrome(executable_path=path,options=options)
        
         self._driver.get('https://www.baidu.com/s?wd=%E7%99%BE%E5%BA%A6&ie=utf-8&tn=78040160_5_pg&ch=12')
