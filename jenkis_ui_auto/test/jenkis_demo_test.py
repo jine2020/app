@@ -10,16 +10,16 @@ class TestDemo():
         #namepath = os.path.abspath(os.path.dirname(__file__))
         #projectpath = namepath[:namepath.find("jenkis_ui_auto\\")] + "jenkis_ui_auto\\"
         path='/usr/local/tomcat/tomcat/webapps/chromedriver'
-        try:
-            using_headless=os.environ['using_headless']
-        except KeyError:
-            using_headless=None
-            print('no using_headless')
+        #try:
+        #    using_headless=os.environ['using_headless']
+        #except KeyError:
+        #    using_headless=None
+        #    print('no using_headless')
         options=Options()
-        if using_headless is not None and using_headless.lower()=='true':
-            options.add_argument('--headless')
-        self._driver = webdriver.Chrome(executable_path=path,options=options)
-
+        #if using_headless is not None and using_headless.lower()=='true':
+        #    options.add_argument('--headless')
+        #self._driver = webdriver.Chrome(executable_path=path,options=options)
+        self._driver = webdriver.Chrome(options=options)
         self._driver.get('https://www.baidu.com/s?wd=%E7%99%BE%E5%BA%A6&ie=utf-8&tn=78040160_5_pg&ch=12')
 
     def teardown(self):
