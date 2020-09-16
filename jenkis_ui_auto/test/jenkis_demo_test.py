@@ -9,7 +9,7 @@ class TestDemo():
     def setup(self):
         #namepath = os.path.abspath(os.path.dirname(__file__))
         #projectpath = namepath[:namepath.find("jenkis_ui_auto\\")] + "jenkis_ui_auto\\"
-        path='/usr/local/jenkins/workspace/jenkins_demo/app/jenkis_ui_auto/test'+'\\driver\\chromedriver.exe'
+        path='/usr/local/tomcat/tomcat/webapps/chromedriver'
         try:
             using_headless=os.environ['using_headless']
         except KeyError:
